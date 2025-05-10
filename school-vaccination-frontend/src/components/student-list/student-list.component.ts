@@ -1,4 +1,3 @@
-// src/app/components/student-list/student-list.component.ts
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
@@ -17,7 +16,7 @@ export class StudentListComponent implements OnInit {
     vaccinations: []
   };
 
-  constructor(private http: HttpClient) {}
+  constructor(private readonly http: HttpClient) {}
 
   ngOnInit(): void {
     this.fetchStudents();
