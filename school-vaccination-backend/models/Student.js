@@ -1,15 +1,24 @@
 const mongoose = require('mongoose');
 
 const vaccinationSchema = new mongoose.Schema({
-  name: String,
-  date: Date,
+  vaccineName: { type: String, required: true },
+  dateAdministered: { type: Date, required: true }
 });
 
 const studentSchema = new mongoose.Schema({
-  name: String,
-  age: Number,
-  class: Number,
-  vaccinations: [vaccinationSchema],
+  studentId: {
+    type: String,
+    required: true,
+    unique: true,
+    length: 6
+  },
+  name: { type: String, required: true },
+  age: { type: Number, required: true },
+  class: { type: String, required: true },
+  vaccinationStatus: { type: String, required: true },
+  dateOfBirth: { type: Date, required: true },
+  vaccinations: [vaccinationSchema]
 });
 
-module.exports = mongoose.model('Student', studentSchema);
+const Student = mongoose.model('Student', studentSchema);
+module.exports = Student;
