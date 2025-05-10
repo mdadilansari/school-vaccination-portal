@@ -11,8 +11,8 @@ async function generateUniqueStudentId() {
   throw new Error('Failed to generate a unique student ID.');
 }
 
-function determineVaccinationStatus(vaccinations) {
-  const count = vaccinations.length;
+function determineVaccinationStatus(vaccineNames) {
+  const count = vaccineNames.length;
   if (count >= 2) return 'Fully Vaccinated';
   if (count === 1) return 'Partially Vaccinated';
   return 'Not Vaccinated';
@@ -22,16 +22,25 @@ function determineVaccinationStatus(vaccinations) {
 exports.createStudent = async (req, res) => {
   try {
     const studentId = await generateUniqueStudentId();
-    const vaccinations = req.body.vaccinations || [];
-    const vaccinationStatus = determineVaccinationStatus(vaccinations);
+    const vaccineNames = req.body.vaccinations || [];
+    const vaccinationStatus = determineVaccinationStatus(vaccineNames);
+
+    const today = new Date();
+    const dob = new Date(req.body.dateOfBirth);
+    const age = today.getFullYear() - dob.getFullYear();
+
+    const vaccinations = vaccineNames.map(name => ({
+      vaccineName: name,
+      dateAdministered: new Date()
+    }));
 
     const newStudent = new Student({
       studentId,
       name: req.body.name,
-      age: req.body.age,
+      age,
       class: req.body.class,
       vaccinationStatus,
-      dateOfBirth: req.body.dateOfBirth,
+      dateOfBirth: dob,
       vaccinations
     });
 
@@ -42,7 +51,7 @@ exports.createStudent = async (req, res) => {
       age: savedStudent.age,
       class: savedStudent.class,
       dateOfBirth: savedStudent.dateOfBirth,
-      vaccinations: savedStudent.vaccinations,
+      vaccinations: savedStudent.vaccinations.map(v => v.vaccineName),
       vaccinationStatus: savedStudent.vaccinationStatus
     });
   } catch (error) {
