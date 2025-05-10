@@ -1,0 +1,30 @@
+<!-- src/app/components/student-list/student-list.component.html -->
+<div class="container">
+  <mat-card>
+    <h2>Add Student</h2>
+    <mat-form-field appearance="fill">
+      <mat-label>Name</mat-label>
+      <input matInput [(ngModel)]="newStudent.name">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Age</mat-label>
+      <input matInput type="number" [(ngModel)]="newStudent.age">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Class</mat-label>
+      <input matInput type="text" [(ngModel)]="newStudent.class">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Date of Birth</mat-label>
+      <input matInput type="date" [(ngModel)]="newStudent.dateOfBirth">
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="addStudent()">Add</button>
+  </mat-card>
+
+  <mat-card *ngFor="let student of students">
+    <mat-card-title>{{ student.name }} (Class {{ student.class }})</mat-card-title>
+    <mat-card-subtitle>Age: {{ student.age }}</mat-card-subtitle>
+    <p>Vaccination Status: {{ student.vaccinationStatus }}</p>
+    <button mat-button color="warn" (click)="deleteStudent(student.studentId)">Delete</button>
+  </mat-card>
+</div>
