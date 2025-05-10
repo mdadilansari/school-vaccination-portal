@@ -10,7 +10,7 @@ export class DriveComponent implements OnInit {
   drive: any;
   newDrive = { date: '', vaccine: '', dosesAvailable: null };
 
-  constructor(private http: HttpClient) {}
+  constructor(private readonly http: HttpClient) {}
 
   ngOnInit(): void {
     this.fetchDrive();

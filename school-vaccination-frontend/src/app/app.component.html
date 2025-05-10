@@ -1,8 +1,30 @@
 <mat-toolbar color="primary">
-  <span>{{ title }}</span>
+  <span class="title">{{ title }}</span>
+
+  <button
+    mat-button
+    routerLink="/dashboard"
+    routerLinkActive="active-link"
+    [routerLinkActiveOptions]="{ exact: true }"
+  >
+    Dashboard
+  </button>
+
+  <button
+    mat-button
+    routerLink="/students-information"
+    routerLinkActive="active-link"
+  >
+    Students
+  </button>
+
+  <button
+    mat-button
+    routerLink="/drives-information"
+    routerLinkActive="active-link"
+  >
+    Drives
+  </button>
 </mat-toolbar>
 
-<div class="main-container">
-  <app-student-list></app-student-list>
-  <app-drive></app-drive>
-</div>
+<router-outlet></router-outlet>

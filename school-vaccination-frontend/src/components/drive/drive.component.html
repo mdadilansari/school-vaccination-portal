@@ -2,16 +2,18 @@
   <mat-card>
     <h2>Schedule Drive</h2>
     <mat-form-field appearance="fill">
-      <mat-label>Date</mat-label>
-      <input matInput type="date" [(ngModel)]="newDrive.date">
+        <mat-label>Date of Drive</mat-label>
+        <input matInput [matDatepicker]="dodPicker" [(ngModel)]="newDrive.date" name="dateOfDrive" required>
+        <mat-datepicker-toggle matSuffix [for]="dodPicker"></mat-datepicker-toggle>
+        <mat-datepicker #dodPicker></mat-datepicker>
     </mat-form-field>
     <mat-form-field appearance="fill">
       <mat-label>Vaccine</mat-label>
-      <input matInput [(ngModel)]="newDrive.vaccine">
+      <input matInput [(ngModel)]="newDrive.vaccine" required>
     </mat-form-field>
     <mat-form-field appearance="fill">
       <mat-label>Doses Available</mat-label>
-      <input matInput type="number" [(ngModel)]="newDrive.dosesAvailable">
+      <input matInput type="number" [(ngModel)]="newDrive.dosesAvailable" required>
     </mat-form-field>
     <button mat-raised-button color="primary" (click)="createDrive()">Create</button>
   </mat-card>

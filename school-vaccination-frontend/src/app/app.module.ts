@@ -19,17 +19,23 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { StudentsInformationPage } from './pages/students-information/students-information.page';
+import { DrivesInformationPage } from './pages/drives-information/drives-information.page';
+import { DashboardPage } from './pages/dashboard/dashboard.page';
 
 @NgModule({
   declarations: [
     AppComponent,
     StudentListComponent,
-    DriveComponent
+    DriveComponent,
+    StudentsInformationPage,
+    DrivesInformationPage,
+    DashboardPage
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-     HttpClientModule,
+    HttpClientModule,
     FormsModule,
     MatToolbarModule,
     MatButtonModule,
