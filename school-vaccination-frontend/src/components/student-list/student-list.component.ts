@@ -8,13 +8,19 @@ import { HttpClient } from '@angular/common/http';
 })
 export class StudentListComponent implements OnInit {
   students: any[] = [];
-  newStudent = {
+  newStudent: {
+    name: string;
+    class: string;
+    dateOfBirth: string;
+    vaccinations: string[];
+  } = {
     name: '',
-    age: null,
-    class: null,
+    class: '',
     dateOfBirth: '',
     vaccinations: []
   };
+
+  vaccinationOptions = ['TT', 'Measles', 'None'];
 
   constructor(private readonly http: HttpClient) {}
 
@@ -26,10 +32,22 @@ export class StudentListComponent implements OnInit {
     this.http.get<any[]>('http://localhost:5000/api/students').subscribe(data => this.students = data);
   }
 
-  addStudent() {
-    this.http.post('http://localhost:5000/api/students', this.newStudent).subscribe(() => {
+   addStudent() {
+    const vaccinations = this.newStudent.vaccinations.includes('None') ? [] : this.newStudent.vaccinations;
+
+    const studentPayload = {
+      ...this.newStudent,
+      vaccinations
+    };
+
+    this.http.post('http://localhost:5000/api/students', studentPayload).subscribe(() => {
       this.fetchStudents();
-      this.newStudent = { name: '', age: null, class: null, dateOfBirth: '', vaccinations: [] };
+      this.newStudent = {
+        name: '',
+        class: '',
+        dateOfBirth: '',
+        vaccinations: []
+      };
     });
   }
 

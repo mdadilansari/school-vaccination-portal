@@ -18,6 +18,7 @@ import { DriveComponent } from 'src/components/drive/drive.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -39,9 +40,10 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatIconModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    NoopAnimationsModule,
     MatCheckboxModule,
   ],
-  providers: [],
+  providers: [MatDatepickerModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
