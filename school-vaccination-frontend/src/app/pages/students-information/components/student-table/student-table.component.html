@@ -1,17 +1,55 @@
 <div class="studentTable">
-  <div style="display: flex; justify-content: space-between;">
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
     <h2>Students Table</h2>
-    <div class="importExportBtns">
-      <div>
-        <button mat-stroked-button color="accent" (click)="exportSelected()" style="margin-bottom: 10px;">
-          Export Selected
-        </button>
-      </div>
 
-      <div>
-        <input type="file" (change)="onFileSelected($event)" accept=".xlsx, .xls" hidden #fileInput>
-        <button mat-raised-button color="primary" (click)="fileInput.click()">Import Excel</button>
-      </div>
+    <div class="importExportBtns" style="display: flex; align-items: center; gap: 10px;">
+      <button mat-flat-button extended color="accent" (click)="toggleFilter()">
+        <mat-icon>filter_list</mat-icon>
+        Filter
+      </button>
+      <button mat-flat-button extended color="accent" [disabled]="selection.isEmpty()" (click)="exportSelected()">
+        Export Selected
+      </button>
+
+      <input type="file" (change)="onFileSelected($event)" accept=".xlsx, .xls" hidden #fileInput>
+      <button mat-raised-button color="primary" (click)="fileInput.click()">Import Excel</button>
+    </div>
+  </div>
+
+  <!-- Filters Section -->
+  <div *ngIf="showFilters" class="filter-container" style="margin: 10px 0;">
+    <mat-form-field appearance="outline" style="margin-right: 10px;">
+      <mat-label>Name</mat-label>
+      <input matInput [(ngModel)]="filterValues.name" (input)="applyFilters()">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" style="margin-right: 10px;">
+      <mat-label>Class</mat-label>
+      <input matInput [(ngModel)]="filterValues.class" (input)="applyFilters()">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" style="margin-right: 10px;">
+      <mat-label>Age</mat-label>
+      <input matInput [(ngModel)]="filterValues.age" (input)="applyFilters()">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" style="margin-right: 10px;">
+      <mat-label>Vaccination</mat-label>
+      <input matInput [(ngModel)]="filterValues.vaccinations" (input)="applyFilters()">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" style="margin-right: 10px;">
+      <mat-label>Registration</mat-label>
+      <mat-select [(ngModel)]="filterValues.registered" (selectionChange)="applyFilters()">
+        <mat-option value="">All</mat-option>
+        <mat-option value="Yes">Yes</mat-option>
+        <mat-option value="No">No</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div style="margin-top: 10px;">
+      <button mat-button color="warn" (click)="clearFilters()">Clear</button>
+      <button mat-button (click)="cancelFilters()">Cancel</button>
     </div>
   </div>
 
@@ -94,7 +132,7 @@
       <ng-container matColumnDef="actions">
         <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
         <mat-cell *matCellDef="let student">
-          <button mat-raised-button color="primary" style="margin-right: 5px;"
+          <button mat-raised-button color="primary" style="margin-right: 5px;" [disabled]="student.enrolledInDrive"
             (click)="enrollStudent(student.studentId)">Enroll</button>
           <button mat-raised-button color="warn" (click)="deleteStudent(student.studentId)">Delete</button>
         </mat-cell>
