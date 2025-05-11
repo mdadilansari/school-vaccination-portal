@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
+import { MatTableModule } from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -22,12 +23,14 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { StudentsInformationPage } from './pages/students-information/students-information.page';
 import { DrivesInformationPage } from './pages/drives-information/drives-information.page';
 import { DashboardPage } from './pages/dashboard/dashboard.page';
+import { StudentTableComponent } from 'src/components/student-table/student-table.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     StudentListComponent,
     DriveComponent,
+    StudentTableComponent,
     StudentsInformationPage,
     DrivesInformationPage,
     DashboardPage
@@ -38,6 +41,7 @@ import { DashboardPage } from './pages/dashboard/dashboard.page';
     HttpClientModule,
     FormsModule,
     MatToolbarModule,
+    MatTableModule,
     MatButtonModule,
     MatCardModule,
     MatFormFieldModule,
