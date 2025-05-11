@@ -2,6 +2,7 @@ import { Component, Input, Output, EventEmitter, OnInit, ViewChild } from '@angu
 import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
 import * as XLSX from 'xlsx';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'student-table',
@@ -12,10 +13,13 @@ export class StudentTableComponent implements OnInit {
   @Input() students: any[] = [];
   @Output() enrollStudentEvent = new EventEmitter<string>();
   @Output() deleteStudentEvent = new EventEmitter<string>();
+  @Output() uploadFile = new EventEmitter<FormData>();
 
   dataSource!: MatTableDataSource<any>;
   selection = new SelectionModel<any>(true, []);
-  displayedColumns: string[] = ['select', 'studentId', 'name', 'age', 'dob', 'vaccinations', 'registered', 'actions'];
+  displayedColumns: string[] = ['select', 'studentId', 'name', 'age', 'class', 'dob', 'vaccinations', 'registered', 'actions'];
+
+  constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
     this.dataSource = new MatTableDataSource(this.students);
@@ -52,6 +56,7 @@ export class StudentTableComponent implements OnInit {
       StudentID: student.studentId,
       Name: student.name,
       Age: student.age,
+      Class: student.class,
       DOB: student.dateOfBirth,
       Vaccinations: student.vaccinations.map((v: any) => v.vaccineName).join(', ') || 'None',
       Registered: student.enrolledInDrive ? 'Yes' : 'No'
@@ -62,4 +67,16 @@ export class StudentTableComponent implements OnInit {
     XLSX.utils.book_append_sheet(workbook, worksheet, 'Selected Students');
     XLSX.writeFile(workbook, 'selected_students.xlsx');
   }
+
+   onFileSelected(event: any) {
+  const fileInput = event.target;
+  const file: File = fileInput.files[0];
+  if (!file) return;
+
+  const formData = new FormData();
+  formData.append('file', file);
+
+  this.uploadFile.emit(formData);
+  fileInput.value = '';
+}
 }

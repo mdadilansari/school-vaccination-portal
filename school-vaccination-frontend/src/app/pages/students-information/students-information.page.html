@@ -3,7 +3,7 @@
 </register-student>
 
 <student-table [students]="students" (enrollStudentEvent)="enrollStudent($event)"
-  (deleteStudentEvent)="deleteStudent($event)">
+  (deleteStudentEvent)="deleteStudent($event)" (uploadFile)="handleExcelUpload($event)">
 </student-table>
 
 <app-student-list [students]="students" [vaccinationOptions]="vaccinationOptions"

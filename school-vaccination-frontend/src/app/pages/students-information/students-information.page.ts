@@ -11,7 +11,7 @@ export class StudentsInformationPage {
   drive: any;
   driveId: string = '';
   students: any[] = [];
-  vaccinationOptions = ['TT', 'Measles', 'None'];
+  vaccinationOptions = ['TT', 'Measles'];
 
   alertMessage: string | null = null;
   alertType: 'success' | 'danger' | 'info' | 'warning' = 'success';
@@ -74,6 +74,19 @@ export class StudentsInformationPage {
     this.alertMessage = message;
     this.alertType = type;
     setTimeout(() => (this.alertMessage = null), 3000);
+  }
+
+  handleExcelUpload(formData: FormData) {
+
+    this.http.post('http://localhost:5000/api/students/import', formData).subscribe({
+      next: (res: any) => {
+        this.showAlert('Students imported successfully!', 'info');
+        this.fetchStudents();
+      },
+      error: (err) => {
+       this.showAlert('Upload failed', 'danger');
+      }
+    });
   }
 
 }

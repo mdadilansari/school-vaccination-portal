@@ -1,4 +1,5 @@
 const Student = require('../models/Student');
+const XLSX = require('xlsx');
 
 async function generateUniqueStudentId() {
   for (let i = 0; i < 5; i++) {
@@ -133,5 +134,43 @@ exports.getStudentById = async (req, res) => {
     res.status(200).json(student);
   } catch (error) {
     res.status(500).json({ message: 'Error fetching student', error: error.message });
+  }
+};
+
+exports.importStudentsFromExcel = async (req, res) => {
+  try {
+    const workbook = XLSX.read(req.file.buffer, { type: 'buffer' });
+    const sheet = workbook.Sheets[workbook.SheetNames[0]];
+    const studentData = XLSX.utils.sheet_to_json(sheet);
+
+    const importedStudents = [];
+
+    for (const data of studentData) {
+      const studentId = await generateUniqueStudentId();
+      const dob = new Date(data.dateOfBirth);
+      const age = new Date().getFullYear() - dob.getFullYear();
+      const vaccinations = (data.vaccinations || '').split(',').map(v => ({
+        vaccineName: v.trim(),
+        dateAdministered: new Date()
+      }));
+
+      const newStudent = new Student({
+        studentId,
+        name: data.name,
+        age,
+        class: data.class,
+        dateOfBirth: dob,
+        vaccinationStatus: determineVaccinationStatus(vaccinations.map(v => v.vaccineName)),
+        vaccinations
+      });
+
+      const saved = await newStudent.save();
+      importedStudents.push(saved);
+    }
+
+    res.status(201).json({ message: 'Import successful', count: importedStudents.length });
+  } catch (err) {
+    console.error(err);
+    res.status(400).json({ message: 'Import failed', error: err.message });
   }
 };

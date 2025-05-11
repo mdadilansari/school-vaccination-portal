@@ -1,9 +1,18 @@
 <div class="studentTable">
   <div style="display: flex; justify-content: space-between;">
     <h2>Students Table</h2>
-  <button mat-stroked-button color="accent" (click)="exportSelected()" style="margin-bottom: 10px;">
-    Export Selected
-  </button>
+    <div class="importExportBtns">
+      <div>
+        <button mat-stroked-button color="accent" (click)="exportSelected()" style="margin-bottom: 10px;">
+          Export Selected
+        </button>
+      </div>
+
+      <div>
+        <input type="file" (change)="onFileSelected($event)" accept=".xlsx, .xls" hidden #fileInput>
+        <button mat-raised-button color="primary" (click)="fileInput.click()">Import Excel</button>
+      </div>
+    </div>
   </div>
 
   <mat-card>
@@ -12,17 +21,13 @@
       <!-- Checkbox Column -->
       <ng-container matColumnDef="select">
         <mat-header-cell *matHeaderCellDef>
-          <mat-checkbox
-            (change)="masterToggle()"
-            [checked]="isAllSelected()"
+          <mat-checkbox (change)="masterToggle()" [checked]="isAllSelected()"
             [indeterminate]="selection.hasValue() && !isAllSelected()">
           </mat-checkbox>
         </mat-header-cell>
         <mat-cell *matCellDef="let row">
-          <mat-checkbox
-          (click)="$event.stopPropagation()"
-          (change)="$event ? selection.toggle(row) : null"
-          [checked]="selection.isSelected(row)">
+          <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
+            [checked]="selection.isSelected(row)">
           </mat-checkbox>
         </mat-cell>
       </ng-container>
@@ -39,6 +44,12 @@
         <mat-cell *matCellDef="let student"> {{ student.name }} </mat-cell>
       </ng-container>
 
+      <!-- Class -->
+      <ng-container matColumnDef="class">
+        <mat-header-cell *matHeaderCellDef> Class </mat-header-cell>
+        <mat-cell *matCellDef="let student"> {{ student.class }} </mat-cell>
+      </ng-container>
+
       <!-- Age -->
       <ng-container matColumnDef="age">
         <mat-header-cell *matHeaderCellDef> Age </mat-header-cell>
@@ -47,7 +58,7 @@
 
       <!-- DOB -->
       <ng-container matColumnDef="dob">
-        <mat-header-cell *matHeaderCellDef> DOB </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef> Date Of Birth </mat-header-cell>
         <mat-cell *matCellDef="let student"> {{ student.dateOfBirth | date }} </mat-cell>
       </ng-container>
 
@@ -83,7 +94,8 @@
       <ng-container matColumnDef="actions">
         <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
         <mat-cell *matCellDef="let student">
-          <button mat-raised-button color="primary" style="margin-right: 5px;" (click)="enrollStudent(student.studentId)">Enroll</button>
+          <button mat-raised-button color="primary" style="margin-right: 5px;"
+            (click)="enrollStudent(student.studentId)">Enroll</button>
           <button mat-raised-button color="warn" (click)="deleteStudent(student.studentId)">Delete</button>
         </mat-cell>
       </ng-container>
