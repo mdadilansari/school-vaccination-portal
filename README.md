@@ -45,13 +45,22 @@ school-vaccination-tracker/
 │   ├── controllers/
 │   └── server.js
 ├── frontend/
-│   ├── src/
-│   │   ├── app/
-│   │   │   ├── components/
-│   │   │   ├── services/
-│   │   │   └── app.module.ts
-│   └── angular.json
-└── README.md
+├── .angular/                     # Angular build info
+├── .vscode/                      # VSCode workspace settings
+├── node_modules/                 # Project dependencies
+├── src/
+│   └── app/
+│       ├── pages/
+│       │   ├── dashboard/              # Dashboard view and logic
+│       │   ├── drives-information/     # Vaccination drives list and management
+│       │   ├── login/                  # Login page and styling
+│       │   └── students-information/   # Student records and enrollment features
+│       ├── app-routing.module.ts       # Route definitions
+│       ├── app.component.*             # Root component files
+│       └── ...                         # Other global modules/services
+├── angular.json                   # Angular project configuration
+├── package.json                   # Project metadata and scripts
+└── README.md                      # Project documentation
 ```
 
 ---
