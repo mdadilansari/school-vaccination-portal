@@ -18,12 +18,14 @@
     <button mat-raised-button color="primary" (click)="createDrive()">Create</button>
   </mat-card>
 
-  <mat-card *ngIf="drive">
-    <mat-card-title>Upcoming Drive</mat-card-title>
-    <p>Date: {{ drive.date | date }}</p>
-    <p>Vaccine: {{ drive.vaccine }}</p>
-    <p>Doses Available: {{ drive.dosesAvailable }}</p>
-  </mat-card>
+  <mat-card *ngIf="drive" class="upcoming-drive-card">
+  <mat-card-title class="title">Upcoming Drive</mat-card-title>
+  <p class="drive-details">Date: {{ drive.date | date }}</p>
+  <p class="drive-details">Vaccine: {{ drive.vaccine }}</p>
+  <p class="drive-details">Doses Available: {{ drive.dosesAvailable }}</p>
+  <p class="drive-details">Students Registered: {{ drive.studentsEnrolled.length }}</p>
+  <p class="drive-details">Doses Left: {{ drive.dosesAvailable - drive.studentsEnrolled.length }}</p>
+</mat-card>
 </div>
 
 <div *ngIf="alertMessage" class="alert alert-fixed-bottom" [ngClass]="'alert-' + alertType" role="alert">

@@ -10,6 +10,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
 import * as XLSX from 'xlsx';
 import { HttpClient } from '@angular/common/http';
+import { MatDialog } from '@angular/material/dialog';
+import { StudentEditDialogComponent } from '../student-edit-dialog/student-edit-dialog.component';
 
 @Component({
   selector: 'student-table',
@@ -45,7 +47,7 @@ export class StudentTableComponent implements OnInit {
     registered: '',
   };
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,private dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.dataSource = new MatTableDataSource(this.students);
@@ -151,4 +153,22 @@ export class StudentTableComponent implements OnInit {
 
     this.dataSource.filter = JSON.stringify(this.filterValues);
   }
+
+  openEditDialog(student: any) {
+  const dialogRef = this.dialog.open(StudentEditDialogComponent, {
+    width: '400px',
+    data: { ...student },
+  });
+
+  dialogRef.afterClosed().subscribe(updated => {
+    if (updated) {
+      // Update the local table if needed
+      const index = this.students.findIndex(s => s.studentId === updated.studentId);
+      if (index !== -1) {
+        this.students[index] = updated;
+        this.dataSource.data = [...this.students];
+      }
+    }
+  });
+}
 }

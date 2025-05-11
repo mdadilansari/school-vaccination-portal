@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
@@ -25,6 +25,9 @@ import { DrivesInformationPage } from './pages/drives-information/drives-informa
 import { DashboardPage } from './pages/dashboard/dashboard.page';
 import { StudentTableComponent } from 'src/app/pages/students-information/components/student-table/student-table.component';
 import { RegisterStudentComponent } from './pages/students-information/components/register-student/register-student.component';
+import { StudentEditDialogComponent } from './pages/students-information/components/student-edit-dialog/student-edit-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { LoginPage } from './pages/login/login.page';
 
 @NgModule({
   declarations: [
@@ -35,7 +38,9 @@ import { RegisterStudentComponent } from './pages/students-information/component
     StudentsInformationPage,
     DrivesInformationPage,
     DashboardPage,
-    RegisterStudentComponent
+    RegisterStudentComponent,
+    StudentEditDialogComponent,
+    LoginPage
   ],
   imports: [
     BrowserModule,
@@ -50,10 +55,12 @@ import { RegisterStudentComponent } from './pages/students-information/component
     MatInputModule,
     MatSelectModule,
     MatIconModule,
+    MatDialogModule,
     MatDatepickerModule,
     MatNativeDateModule,
     NoopAnimationsModule,
     MatCheckboxModule,
+    ReactiveFormsModule
   ],
   providers: [MatDatepickerModule],
   bootstrap: [AppComponent]

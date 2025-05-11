@@ -1,3 +1,11 @@
+::ng-deep .mat-column-name {
+  width: 50px; /* Adjust width as needed */
+}
+
+mat-header-cell, mat-cell {
+  padding: 8px; /* Adjust padding for better spacing */
+}
+
 .studentTable{
   padding: 18px;
 }

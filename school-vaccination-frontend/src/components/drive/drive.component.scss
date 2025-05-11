@@ -7,6 +7,32 @@
   flex-direction: column;
 }
 
-mat-card {
+.upcoming-drive-card {
+  background-color: #f9f9f9;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  margin: 20px auto;
+}
+
+.title {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #2c3e50;
   margin-bottom: 10px;
+}
+
+.drive-details {
+  font-size: 1.1em;
+  color: #34495e;
+  margin: 5px 0;
+}
+
+.drive-details:first-child {
+  font-weight: bold;
+}
+
+.mat-card-title {
+  font-family: 'Roboto', sans-serif;
 }
