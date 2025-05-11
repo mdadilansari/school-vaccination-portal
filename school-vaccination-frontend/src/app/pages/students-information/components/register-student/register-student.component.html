@@ -30,17 +30,4 @@
       <button mat-raised-button color="primary" (click)="addStudent()" [disabled]="!studentForm.form.valid">Add</button>
     </form>
   </mat-card>
-
-  <mat-card *ngFor="let student of students">
-    <mat-card-title>{{ student.name }} (Class {{ student.class }})</mat-card-title>
-    <mat-card-subtitle>Age: {{ student.age }}</mat-card-subtitle>
-    <p>Vaccination Status: {{ student.vaccinationStatus }}</p>
-    <p>Enrolled in Vaccination Drive: {{ student.enrolledInDrive }}</p>
-    <button mat-button color="primary" (click)="enrollStudent(student.studentId)">Enroll in Drive</button>
-    <button mat-button color="warn" (click)="deleteStudent(student.studentId)">Delete</button>
-  </mat-card>
-</div>
-
-<div *ngIf="alertMessage" class="alert alert-fixed-bottom" [ngClass]="'alert-' + alertType" role="alert">
-  {{ alertMessage }}
-</div>
+<div>

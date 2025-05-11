@@ -14,7 +14,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
-import { StudentListComponent } from 'src/components/student-list/student-list.component';
+import { StudentListComponent } from 'src/app/pages/students-information/components/student-list/student-list.component';
 import { DriveComponent } from 'src/components/drive/drive.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
@@ -23,7 +23,8 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { StudentsInformationPage } from './pages/students-information/students-information.page';
 import { DrivesInformationPage } from './pages/drives-information/drives-information.page';
 import { DashboardPage } from './pages/dashboard/dashboard.page';
-import { StudentTableComponent } from 'src/components/student-table/student-table.component';
+import { StudentTableComponent } from 'src/app/pages/students-information/components/student-table/student-table.component';
+import { RegisterStudentComponent } from './pages/students-information/components/register-student/register-student.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { StudentTableComponent } from 'src/components/student-table/student-tabl
     StudentTableComponent,
     StudentsInformationPage,
     DrivesInformationPage,
-    DashboardPage
+    DashboardPage,
+    RegisterStudentComponent
   ],
   imports: [
     BrowserModule,
