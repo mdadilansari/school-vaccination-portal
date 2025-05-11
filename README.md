@@ -65,6 +65,29 @@ school-vaccination-tracker/
 
 ---
 
+## 🔌 API Endpoints
+
+### 👤 Authentication
+- `POST /api/login` – Authenticate admin
+
+### 📚 Students
+- `GET /api/students` – Get all students
+- `GET /api/students/:id` – Get single student
+- `POST /api/students` – Add student
+- `PUT /api/students/:id` – Update student
+- `DELETE /api/students/:id` – Delete student
+
+### 💉 Vaccination Drives
+- `GET /api/drive` – Get all drives
+- `POST /api/drive` – Create new drive
+- `DELETE /api/drive/:id` – Delete drive
+
+### 📋 Enrollments
+- `POST /api/enroll/:studentId` – Enroll a student to upcoming drive
+
+---
+
+
 ## 🧪 Getting Started
 
 ### Prerequisites
