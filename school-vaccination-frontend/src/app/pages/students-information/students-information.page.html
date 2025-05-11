@@ -2,13 +2,13 @@
   (addStudentEvent)="addStudent($event)">
 </register-student>
 
-<app-student-list [students]="students" [vaccinationOptions]="vaccinationOptions"
- (enrollStudentEvent)="enrollStudent($event)" (deleteStudentEvent)="deleteStudent($event)">
-</app-student-list>
-
 <student-table [students]="students" (enrollStudentEvent)="enrollStudent($event)"
   (deleteStudentEvent)="deleteStudent($event)">
 </student-table>
+
+<app-student-list [students]="students" [vaccinationOptions]="vaccinationOptions"
+ (enrollStudentEvent)="enrollStudent($event)" (deleteStudentEvent)="deleteStudent($event)">
+</app-student-list>
 
 <div *ngIf="alertMessage" class="alert alert-fixed-bottom" [ngClass]="'alert-' + alertType" role="alert">
   {{ alertMessage }}

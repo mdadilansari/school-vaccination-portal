@@ -1,4 +1,5 @@
-<mat-card>
+<div class="studentTable">
+  <mat-card>
   <mat-table [dataSource]="students" class="mat-elevation-z8">
 
     <ng-container matColumnDef="studentId">
@@ -59,3 +60,5 @@
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </mat-table>
 </mat-card>
+
+</div>
