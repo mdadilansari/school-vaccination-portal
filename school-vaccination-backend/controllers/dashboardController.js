@@ -1,4 +1,4 @@
-const Student = require('../models/student.js');
+const Student = require('../models/Student.js');
 const Drive = require('../models/Drive.js');
 
 exports.getDashboardData = async (req, res) => {

@@ -17,7 +17,8 @@ const studentSchema = new mongoose.Schema({
   class: { type: String, required: true },
   vaccinationStatus: { type: String, required: true },
   dateOfBirth: { type: Date, required: true },
-  vaccinations: [vaccinationSchema]
+  vaccinations: [vaccinationSchema],
+  enrolledInDrive: { type: Boolean, default: false }
 });
 
 const Student = mongoose.model('Student', studentSchema);

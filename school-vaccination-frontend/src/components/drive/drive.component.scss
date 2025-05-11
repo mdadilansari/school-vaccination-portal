@@ -2,6 +2,11 @@
   padding: 20px;
 }
 
+.driveForm{
+  display: flex;
+  flex-direction: column;
+}
+
 mat-card {
   margin-bottom: 10px;
 }

@@ -25,3 +25,7 @@
     <p>Doses Available: {{ drive.dosesAvailable }}</p>
   </mat-card>
 </div>
+
+<div *ngIf="alertMessage" class="alert alert-fixed-bottom" [ngClass]="'alert-' + alertType" role="alert">
+  {{ alertMessage }}
+</div>
