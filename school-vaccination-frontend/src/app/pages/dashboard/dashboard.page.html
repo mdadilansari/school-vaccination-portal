@@ -1,1 +1,34 @@
-<p>dashboard works!</p>
+<div class="dashboard-container">
+  <h1>School Vaccination Dashboard</h1>
+  <div class="dashboard-cards">
+    <!-- Total Students Card -->
+    <mat-card class="dashboard-card stat-card">
+      <mat-card-header>
+        <div class="mat-card-title">Total Students</div>
+      </mat-card-header>
+      <mat-card-content>
+        <p>{{ totalStudents }}</p>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="dashboard-card stat-card">
+      <mat-card-header>
+        <div class="mat-card-title">Registered for Drive</div>
+      </mat-card-header>
+      <mat-card-content>
+        <p>{{ registeredStudents }}</p>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="dashboard-card" *ngIf="upcomingDrives">
+      <mat-card-header>
+        <div class="mat-card-title">Upcoming Drives</div>
+      </mat-card-header>
+      <mat-card-content>
+        <p>Date: {{ drive.date | date }}</p>
+        <p>Vaccine: {{ drive.vaccine }}</p>
+        <p>Doses Available: {{ drive.dosesAvailable }}</p>
+      </mat-card-content>
+
+    </mat-card>
+  </div>
